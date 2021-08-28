@@ -1,0 +1,102 @@
+
+<div class="container-fluid head">
+    <div class="container">
+        <h2>Stocks</h2>
+    </div>
+</div>
+<div class="container">
+
+
+    <mat-card class="m-30px">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+
+                <h2 class="text-center">The easiest way to buy and sell stocks</h2>
+                <p class="text-center">Stock analysis and screening tool for inverstors in india</p>
+            </div>
+        </div>
+        <form [formGroup]="objStockSearchForm">
+            <div class="form-group">
+                <!-- <lable>Search</lable> -->
+                <span class="fa fa-search form-control-feedback"></span>
+                <input type="text" name="Stockes" id="strStockName" aria-label="Number"
+                placeholder="Search" aria-label="Search" #autoCompleteStock class="form-control"
+                [matAutocomplete]="strStockName" formControlName="strStockName">
+            <mat-autocomplete autoActiveFirstOption #strStockName="matAutocomplete" [displayWith]="displayStock"
+                (optionSelected)="autocompleteStockSelected($event)" (closed)="autoCompleteStockClosed()">
+                <mat-option *ngFor="let strStockName of objFilteredOptionsStock$ | async" [value]="strStockName">
+                    {{strStockName.strName}}
+                </mat-option>
+            </mat-autocomplete>
+            </div>
+        </form>
+    </mat-card>
+</div>
+
+<div class="container "*ngIf="objCompanyDetails"  >
+    <mat-card class="m-30px">
+        <h5>{{strSelectedCompany}}</h5>
+        <div class="row details">
+            <div class="col-md-4 box-details">
+                <mat-card>
+                    Market Cap :₹ {{objCompanyDetails.dblMarketCap}}
+                </mat-card>
+
+            </div>
+            <div class="col-md-4 box-details">
+                <mat-card>
+                    Dividend Yield : {{objCompanyDetails.dblDividendYield}} %
+                </mat-card>
+
+            </div>
+            <div class="col-md-4 box-details">
+                <mat-card>
+                    Debt to Equity : {{objCompanyDetails.dblDebtToEquity}} %
+                </mat-card>
+
+            </div>
+            <div class="col-md-4 box-details">
+                <mat-card>
+                    Current Price : ₹ {{objCompanyDetails.dblCurrentMarketPrice}}
+                </mat-card>
+
+            </div>
+            <div class="col-md-4 box-details">
+                <mat-card>
+                    ROCE  : {{objCompanyDetails.dblROCEPerc}} %
+                </mat-card>
+
+            </div>
+            <div class="col-md-4 box-details">
+                <mat-card>
+                    Eps : ₹ {{objCompanyDetails.dblEPS}} %
+                </mat-card>
+
+            </div>
+            <div class="col-md-4 box-details">
+                <mat-card>
+                    Stock P/E : {{objCompanyDetails.intStockPerc}} %
+                </mat-card>
+
+            </div>
+            <div class="col-md-4 box-details">
+                <mat-card>
+                    ROE  : {{objCompanyDetails.dblROEPreviousAnnum}} %
+                </mat-card>
+
+            </div>
+            <div class="col-md-4 box-details">
+                <mat-card>
+                    Reserves : ₹ {{objCompanyDetails.dblReserves}}
+                </mat-card>
+
+            </div>
+            <div class="col-md-4 box-details">
+                <mat-card>
+                    Debt : ₹ {{objCompanyDetails.Debt}}
+                </mat-card>
+
+            </div>
+        </div>
+    </mat-card>
+</div>
